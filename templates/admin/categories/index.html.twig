@@ -13,8 +13,8 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nom</th>
-                            <th>Parent</th>
+                            <th>Sous-categorie</th>
+                            <th>Categorie-Parent</th>
                             {# <th>Slug</th> #}
                             <th>Ordre</th>
                             <th>Action</th>
@@ -31,7 +31,7 @@
                                 <td>{{ categorie.id }}</td>
                                 <td>{{ categorie.name }}</td>
                                
-                                <td>{{ categorie.cat_parent }}</td>
+                                <td>{{ categorie.parent }}</td>
                                     {# {% if categorie.cat_parent is not null %} #}
                                         
                                     {# {% endif %} #}

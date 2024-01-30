@@ -62,7 +62,7 @@ class CategoriesController extends AbstractController
         //* création du formulaire
         $categorieForm = $this->createForm(CategoriesFormType::class, $newCategorie);
         
-        dd($categorieForm);
+   
         
         //* traite la requête du formulaire
         $categorieForm->handleRequest($request);

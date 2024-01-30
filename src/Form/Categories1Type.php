@@ -27,6 +27,9 @@ class Categories1Type extends AbstractType
                 //         ->orderBy('c.name', 'ASC');
                 // }
             ])
+               ->add('cat_parent', options:[
+                'label' => 'catégorie-parent'
+            ])
         ;
     }
 

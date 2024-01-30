@@ -15,6 +15,15 @@ class Categories
     #[ORM\Column]
     private ?int $id = null;
 
+    // /**
+    //  * @Assert\NotBlank(message="Le nom ne peut pas être vide.")
+    //  * @Assert\Length(
+    //  *     min=3,
+    //  *     max=255,
+    //  *     minMessage="Le nom doit contenir au moins 3 caractères.",
+    //  *     maxMessage="Le nom ne peut pas dépasser 255 caractères."
+    //  * )
+    //  */
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -34,7 +43,7 @@ class Categories
     private ?int $categoryOrder = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $cat_parent = null;
+    private ?string $parent = null;
 
     public function __construct()
     {
@@ -152,14 +161,14 @@ class Categories
         return $this;
     }
 
-    public function getCat_parent(): ?string
+    public function getParent(): ?string
     {
-        return $this->cat_parent;
+        return $this->parent;
     }
 
-    public function setCat_parent(?string $cat_parent): static
+    public function setParent(?string $parent): static
     {
-        $this->cat_parent = $cat_parent;
+        $this->parent = $parent;
 
         return $this;
     }

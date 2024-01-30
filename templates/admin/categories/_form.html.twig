@@ -1,11 +1,7 @@
 {{ form_start(categorie) }}
 
-<pre>
-    {{ dump(categorie) }}
-</pre>
-
+    {{ form_row(categorie.parent) }}
     {{ form_row(categorie.name) }}
-    {{ form_row(categorie.cat_parent) }}
     {{ form_row(categorie.categoryOrder) }}
 
 

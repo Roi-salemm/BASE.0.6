@@ -31,10 +31,30 @@ class CategoriesFormType extends AbstractType
                 'label' => 'Ordre d\'affichage',
             ]) 
              
-            ->add('cat_parent', options:[
+            ->add('parent', options:[
                 'label' => 'catégorie-parent'
             ])
 
+            // ->add('parent', EntityType::class,[
+            //     'class' => Categories::class,
+            //     'label' => 'catégorie-parent',
+            //     'choice_label' => 'parent',
+            // ])
+
+
+
+        //     ->add('categories', EntityType::class, [
+        //         'class' => Categories::class,
+        //         'choice_label' => 'name',
+        //         'label' => 'Categorie',
+                
+        //         // 'group_by' => 'cat_parent.name', // Groupe par categorie parent
+        //         // 'query_builder' => function(CategoriesRepository $cr)
+        //         // {
+        //         //     return $cr->createQueryBuilder('c')
+        //         //     ->where('c.cat_parent')         // trie les category qui ont un parent 
+        //         //     ->orderBy('c.name', 'ASC');             // Trie 
+        //         // } 
         ;
     }
 
