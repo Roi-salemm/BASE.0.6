@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits par categorie{% endblock %}
+
+{% block body %}
+
+{# {{ dump() }}  #}
+
+    {% for data in categories %}
+        
+        <main class="container">
+            <section class="row">
+                <div class="col-12">
+                    <img src="{{ asset('assets/uploads/products/mini/300x300-'~ data.images[0].name ) }}" class="card-img-top" alt="{{ data.name }}">
+                    {# <h1>Liste des produits de la catégorie {{categories.name|raw }}</h1> #}
+                    <h1>Liste des produits de la catégorie {{data.name}}</h1>
+                    {# <p>{{ categories }} </p> #}
+                    <p>{{ slugName }} </p>
+                </div>
+            </section>
+        </main>
+
+    {% endfor %}
+
+{% endblock %}

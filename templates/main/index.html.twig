@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+
+<main class="container">
+    <secrion class="row">
+        <div class="col-12">
+
+            <h1>TAKE-AWAY FLOWERS</h1>
+            <h2>Vente de Fleurs à emporté</h2>
+            <p>Je sait, c'est un concept...</p>
+
+        </div>
+        <div class="col-12">
+
+            {# <a href="{{ path('indexProduits') }}">Page des produits</a>
+
+            <a href="{{ path('categoriesList') }}">Page des categories</a> #}
+
+            {# <a href="{{ path('') }}"></a>
+
+            <a href="{{ path('') }}"></a> #}
+
+        </div>
+
+        {# {{ dump() }} Faire un dump pour voir la liste des categories disponible dans cette vue !!  #}
+            
+        {% for cat in categories %}
+        
+            {% if cat.parent == null %}
+                <div class="col-12">
+                    <h2>{{ cat.name }}</h2>
+                </div>
+            {% endif %}   
+
+            {% if cat.name == 'Fleurs Unique' %}
+            {% elseif cat.name == 'Bouquets' %}
+
+            {% else %}
+                <div class="col-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ cat.name }}</h3>
+                            {# {{categories.name}} #}
+                            {# <a href="{{ path('produitsDetails', {slug: cat.name, }) }}" class="btn btn-primary">voir {{ cat.name }}</a> #}
+                            {# <a href="#" class="btn btn-primary">Voir les produits</a> #}
+                            
+                        </div>
+                    </div>
+                </div>  
+            {% endif %}
+        {% endfor %}
+
+
+<br>
+<br>
+<h2> Les produits :</h2>
+<br>
+<br>
+
+
+
+{#             
+        {% for pro in products %}
+            <div class="col-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ pro.name }}</h3> #}
+                        {# <a href="{{ path('produits_list', {"slugName": pro.name }) }}" class="btn btn-primary">voir {{ pro.name }}</a> #}
+                    {# </div>
+                </div>
+            </div>  
+        {% endfor %} #}
+
+        
+        
+    </secrion>
+</main>
+
+
+
+
+{% endblock %}

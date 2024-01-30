@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            {% include "_partials/_adminnav.html.twig" %}
+
+            <h1>Categories index</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>CategoryOrder</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.categoryOrder }}</td>
+                        <td>
+                            {# <a href="{{ path('admin_categories_index', {'id': category.id}) }}">show</a> #}
+                            <a href="{{ path('admin_categories_add', {'id': category.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ path('admin_categories_add') }}">Create new</a>
+
+        </div>
+    </div>
+{% endblock %}

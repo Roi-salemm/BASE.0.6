@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Chargement{% endblock %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/css/fonctionality/loader.css') }}">
+    {% endblock %}
+
+{% block body %}
+
+<div class="loader">
+
+    <div class="container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <div class="container">
+        <div class="shadow"></div>
+        <div class="shadow"></div>
+        <div class="shadow"></div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+
+    {% block javascripts %}
+        <script src="{{ asset('assets/js/fonctionality/loader.js') }}" defer></script>
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+
+    {% endblock %}

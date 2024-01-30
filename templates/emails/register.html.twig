@@ -1,0 +1,6 @@
+<h1>Activez votre compte</h1>
+
+<p>Bonjour {{ user.firstname }} </p>
+<p>Votre inscription sur le site ... est à valiter en cliquant sur ce  <a href="{{ absolute_url(path('verify_user', {token: token})) }}">lien</a></p>
+{# <p>Votre inscription sur le site ... est à valiter en cliquant sur ce  <a href="{{ url('/') }}">lien{{ absolut_url(path('veryfy_user', {token: token})) }}</a></p> #}
+<p>Ce lien expirera dans 3 Heurs</p>

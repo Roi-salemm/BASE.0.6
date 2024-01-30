@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Administration Utilisateurs{% endblock %}
+
+
+    {% block stylesheets %}
+    {% endblock %}
+
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-white p-2">
+                <h1>Les Produits</h1>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Prenom</th>
+                            <th>Nom</th>
+                            <th>E-mail</th>
+                            <th>Rôles</th>
+                            <th>Vérifié</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.firstname }}</td>
+                                <td>{{ user.lastname }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% for role in user.roles %}
+                                        {% if role == "ROLE_ADMIN" %}
+                                            {% set name = "Administrateur" %}
+                                            {# {% set color = "info" %} #}
+                                        {% elseif role == "ROLE_PRODUCT_ADMIN" %}
+                                            {% set name = "Admin produits" %}
+                                        {% else %}
+                                            {% set name = "Membre" %}
+                                        {% endif %}
+                                        
+                                        <span class="badge bg-secondary">
+                                            {{ name }}
+                                        </span>
+
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {# version ternaire #}
+                                    <input class="form-check-input" type="checkbox" role="switch" id="switch{{ user.id }}" {{ user.isVerified ? "checked" : "" }} disabled>
+                                    <label class="form-check-label" for="switch{{ user.id }}"></label>
+
+                                    {# {% if user.isVerified %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="switch{{ user.id }}" checked disabled>
+                                            <label class="form-check-label" for="switch{{ user.id }}"></label>
+                                        </div>
+                                    {% else %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="switch2{{ user.id }}" disabled>
+                                            <label class="form-check-label" for="switch2{{ user.id }}"></label>
+                                        </div>
+                                    {% endif %} #}
+                                </td>
+                                <td>
+                                    <button class="" href="#">Modifier</button>
+                                </td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </main>
+        </div>
+    </div>
+{% endblock %}
+
+    {% block javascripts %}
+    {% endblock %}
+
+
+
+
+
+
+
+
+    

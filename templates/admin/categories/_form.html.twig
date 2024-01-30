@@ -1,0 +1,15 @@
+{{ form_start(categorie) }}
+
+<pre>
+    {{ dump(categorie) }}
+</pre>
+
+    {{ form_row(categorie.name) }}
+    {{ form_row(categorie.cat_parent) }}
+    {{ form_row(categorie.categoryOrder) }}
+
+
+    {# Le {{ button_label|default('Ajouter') }} permet de changer le btn  
+            cf edit.html.twig -> le include #}
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(categorie) }}   

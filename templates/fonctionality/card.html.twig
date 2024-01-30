@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Cards{% endblock %}
+
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/css/fonctionality/card.css') }}">
+    {% endblock %}
+
+
+
+{% block body %}
+
+    <div class="container2">
+        <div class="card2">
+            <div class="content-card">
+                <img height="300px" width="300px" src="images/fotor-ai-202312081184.jpg" alt="image">
+            </div>
+            {# <div class="glow"> #}
+
+            {# </div> #}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+    {% block javascripts %}
+        <script src="{{ asset('assets/js/fonctionality/card.js') }}" defer></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+
+    {% endblock %}
