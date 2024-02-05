@@ -31,6 +31,8 @@ class ProductsController extends AbstractController
             'controller_name' => 'ProductsController',
             'products' => $pro, 
             'categories' => $categories,
+            'image1' => '7725e4e8fc79d81eac26114250f4fe18.webp',
+            'image2' => 'fb1743aae1d4c2a2dedb036f5a5137df.webp',
         ]);
     }
    

@@ -1,14 +1,59 @@
 {% extends 'base.html.twig' %}
 
+
+    {% block stylesheets %}
+
+        <link rel="stylesheet" href="{{ asset('assets/css/main/index_main.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/main/product.css') }}">
+
+    {% endblock %}
+
+
 {% block title %}Hello ProductsController!{% endblock %}
 
     {% block body %}
+
+
+        <section>
+            <div class="vitrine__menu">
+                <p class="vitrine__baseline">Offrez-vous un présent unique</p>
+            </div>
+
+            <div class="category_menu">
+
+                <a href="" class="category_menu__section_deco">
+                    <P class="category">Déco d'interieur</P>
+                    <li>       
+                        <img src="{{ asset('assets/uploads/products/'~ image2 ) }}"
+                        alt="Description de l'image" 
+                        width="100%" 
+                        height="auto" 
+                        class="invisibility">
+                        
+                    </li>
+                </a>
+
+                <a href="#" class="category_menu__section_animaux">
+                        <P class="category">Animaux</P>
+                    <li>
+                        <img src="{{ asset('assets/uploads/products/'~ image1 ) }}"
+                        alt="Description de l\'image" 
+                        width="100%" 
+                        height="auto" 
+                        class="invisibility">
+                    </li>
+                </a>
+
+            </div>
+        </section>
+
+
         <main class="container">
             <section class="row">
                 {% for item in products %}
                 {# {{ dump(item.id) }} #}
                     <div class="col-4">
-                        <div class="card m-3" style="width: 18rem;">
+                        <div class="card m-3" style="width: 18rem">
                             
                             {# <div class="card-img-top"> #}
                             <img src="{{ asset('assets/uploads/products/mini/300x300-'~ item.images[0].name ) }}" class="card-img-top" alt="{{ item.name }}">
@@ -17,7 +62,7 @@
                                 <h1>{{ item.name }}</h1>
                                 {# <h5 class="card-title">Card title</h5> #}
                                 <p>{{ item.description }}</p>
-                                <a href="{{ path('produits_details', {id: item.id}) }}" class="btn btn-primary">voir {{ item.name }}</a>
+                                <a href="{{ path('produits_details', {id: item.id}) }}" class='btn btn-primary'>voir {{ item.name }}</a>
                             </div>
                         </div>
                     </div>

@@ -47,7 +47,7 @@
                                 <td>{{ produit.name}}</td>
                                 <td>{{ produit.price / 100}}</td>
                                 <td>{{ produit.stock }}</td>
-                                <td>{{ produit.categories }}</td>
+                                <td>{{ produit.categories.name }}</td>
                                 <td>
                                     <button><a class="" href="{{ path('admin_products_edit', {id: produit.id}) }}">Modifier</a></button>
                                     <button><a class="text-danger" href="{{ path('admin_products_delete', {id: produit.id}) }}">Supprimer</a></button>

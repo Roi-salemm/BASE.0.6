@@ -15,7 +15,6 @@
                             <th>ID</th>
                             <th>Sous-categorie</th>
                             <th>Categorie-Parent</th>
-                            {# <th>Slug</th> #}
                             <th>Ordre</th>
                             <th>Action</th>
                         </tr>
@@ -24,21 +23,21 @@
                     <tbody> 
                        
                         {% for categorie in categories %} 
-                        {# <pre>
-                                    {{ dump(categorie) }}
-                                </pre> #}
+                      
                             <tr>
                                 <td>{{ categorie.id }}</td>
                                 <td>{{ categorie.name }}</td>
-                               
                                 <td>{{ categorie.parent }}</td>
                                     {# {% if categorie.cat_parent is not null %} #}
                                         
                                     {# {% endif %} #}
-                                
-                                {# <td>{{ categorie.slug }}</td> #}
                                 <td>{{ categorie.categoryOrder }}</td>
+                                <td>
+                                    <button><a class="" href="{{ path('admin_categories_edit', {id: categorie.id}) }}">Modifier</a></button>
+                                    <button><a class="text-danger" href="{{ path('admin_categories_delete', {id: categorie.id}) }}">Supprimer</a></button>
+                                </td>
                             </tr>
+                            
                         {% endfor %}
                     </tbody>
 

@@ -45,4 +45,18 @@ class CategoriesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+        public function findDistinctCategoriesQueryBuilder()
+        {
+            return $this->createQueryBuilder('c')
+                ->groupBy('c.parent')
+                ->orderBy('c.parent', 'ASC');
+        }
+
+        public function findDistinctCategoriesQueryBuilderName()
+        {
+            return $this->createQueryBuilder('c')
+                ->groupBy('c.name')
+                ->orderBy('c.name', 'ASC');
+        }
 }
