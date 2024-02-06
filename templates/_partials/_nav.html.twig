@@ -1,4 +1,4 @@
-
+{# 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ path('app_main') }}">Main
@@ -16,58 +16,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
-                </li>
-                {# <li class="nav-item">
-                    <a href="{{ path('app_test_controlleur', {slug: '8'}) }}">ici </a>
-                </li>
-          #}
-                    {# {% if  %} #}
-                        {# <li class="nav-item">
-                            <a class="nav-link" href="{{ path('admin_products_add') }}">ADMIN</a>
-                        </li> #}
-                    {# {% else %} #}
-               
+                </li> 
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('produits_vitrine') }}">BOUTIQUE</a>
                 </li>
-
-
                 
-                {# <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        ADMINISTRATION
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="{{ path('admin_products_add') }}">Ajout de produits</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Ajout de categories</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ path('admin_products_edit', {id: 0}) }}">Modifier un produit</a>
-                        </li>
-                        {# <li><hr class="dropdown-divider"></li> #}
-                        {# <li>
-                            <a class="dropdown-item" href="#"></a>
-                        </li>
-                    </ul>
-                </li> #}
-                
-
-                {# <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li> #}
             </ul>
-  
 
-            {# <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search"
-                    placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> #}
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                 {% if app.user %}   
@@ -94,5 +50,51 @@
 
             </ul>
         </div>
-    </div>
+    </div> #}
+
+
+
+
+
+    <header>
+        <div>
+          <i class="fas fa-atom"></i>
+          <p>AMEL RESINE</p>
+        </div>
+        <nav>
+          <ul>
+            
+            <li><a class="" href="{{ path('app_main') }}">ACCUEIL</a></li>
+            <li> <a class="" href="{{ path('produits_vitrine') }}">BOUTIQUE</a></li>
+            {# <li><a href="#">L</a></li>
+            <li><a href="#">C</a></li> #}
+
+            {% if app.user %}   
+                    {% if is_granted('ROLE_PRODUCT_ADMIN') %}
+                        <li class="">
+                            <a class="" href="{{ path('admin_index') }}">Administration</a>
+                        </li>
+                    {% endif %}
+                    
+                    <li class="">
+                        <a class="" href="#">Compte</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="{{ path('app_logout')}}">Déconnexion</a>
+                    </li>
+                {% else %}
+                    <li class="">
+                        <a class="" href="{{ path('app_register')}}">Inscription</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="{{ path('app_login')}}">Connexion</a>
+                    </li>
+                {% endif %}
+
+          </ul>
+        </nav>
+      </header>
+
+
+
 </nav>

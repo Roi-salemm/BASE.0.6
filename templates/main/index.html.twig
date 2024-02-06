@@ -4,6 +4,7 @@
 {% block stylesheets %}
 
 <link rel="stylesheet" href="{{ asset('assets/css/main/index_main.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/product.css') }}">
 
 {% endblock %}
 
@@ -18,121 +19,260 @@
 
 
 
+<section class="imgFromBack">
+    <img src="{{ asset('assets/uploads/products/'~ imagePrincipal ) }}"
+        alt="Description de l'image" 
+        width="100%" 
+        height="100%" 
+
+</section>
+
+
+<section class="overAll">
+    <section class="titles">
+
+        <h1>Création en résine artisanal</h1>
+
+        <div class="space"></div>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam maiores consectetur, laboriosam rerum obcaecati.</p>
+
+    </section>
+
+<div class="space"></div>
+<div class="space"></div>
+<div class="space"></div>
+
+
+    <section class="container-boxes">
+
+    <div class="box">
+
+        <div class="icon">
+        <a href=""><i class="fas fa-fire"></i></a>
+        </div>
+
+        <div class="text">
+        <a href="{{ path('produits_vitrine') }}">
+            <h3>Les   produits</h3>
+            <p>Découvrir les objets pour tous les gouts</p>
+        </a>
+        </div>
+
+    </div>
+
+    <div class="box">
+
+        <div class="icon">
+        <a href=""><i class="fas fa-seedling"></i></a>
+        </div>
+
+        <div class="text">
+        <a href="">
+            <h3>La créatrice</h3>
+            <p>En apprendre plus sur la créartion</p>
+        </a>
+        </div>
+
+    </div>
+
+    <div class="box">
+
+        <div class="icon">
+        <a href=""><i class="fas fa-address-card"></i></a>
+        </div>
+
+        <div class="text">
+        <a href="">
+            <h3>Les Boutiques</h3>
+            <p>Boutique partenaires dans le sud ouest</p>
+        </a>
+        </div>
+
+    </div>
+
+    </section>
+</section>
 
 
 
 
 
 
+{# <section class="ac overAll2">
+
+    <section class="ac__g">
+
+        <div class="g__titre cadreBlur">
+            <p>Une forme</p>
+        </div>
+
+    </section>
+    <section class="ac__d">
+
+        <div class="">
+            <img src="" alt="">
+        </div>
+</section> #}
+
+
+
+<section class="overAll2">
+
+<ul class="cards">
+    {% for item in products %}
 
 
 
 
+        {# <li class="profile__product">
+            <a href=<?php echo base_url("index.php/vitrine/produit");?> class="none" value="">
+            <img src="{{ asset('assets/uploads/products/mini/300x300-'~ item.images[0].name ) }}" alt="{{ item.name }}">
+            <ul class="profile__side">
+                img src="{{ asset('assets/uploads/products/mini/300x300-') ~ image.name }}" class="like_it" alt="{{ product.name }}">
+            </ul> 
+            <div class="profile__info">
+                <div class="profile__color"></div>
+                <h1 class="profile__name"{{ item.name }}</h1>
+                <p class="profile__price">{{ item.price }}</p>
+                <p>{{ item.description }}</p>
+                <button class="profile__see">Jeter un oeil</button>
+            </div>
+            </a>
+        </li> #}
 
 
 
+            <li>
+            <a href="{{ path('produits_details', {id: item.id}) }}" class="card">
+                <img src="{{ asset('assets/uploads/products/mini/300x300-'~ item.images[0].name ) }}" alt="{{ item.name }}" class="card__image">
+                <div class="card__overlay">
+                <div class="card__header">
+                    <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
+                    {# <img class="card__thumb" src="https://i.imgur.com/7D7I6dI.png" alt="" /> #}
+                    <div class="card__header-text">
+                    <h3 class="card__title">{{ item.name }}</h3>            
+                    <span class="card__status">{{ item.price }} $</span>
+                    </div>
+                </div>
+                <p class="card__description">{{ item.description }}</p>
+                </div>
+            </a>      
+            </li>
+            
+
+
+    {% endfor %}
+</section>
+</ul>
 
 
 {# <!-----------------------------------------------------------------
 Based on: GreenSock's pen here: https://codepen.io/GreenSock/pen/jOBBVjr 
 -----------------------------------------------------------------> #}
 
-<div class="news_ticker">
-  <ul class="news-group">
+<section class="absolutLine">
+    <div class="news_ticker">
+    <ul class="news-group">
+        <li><a href="https://example.com" target="_blank">one</a></li>
+        <li><a href="">Cool</a></l>
+        <li><a href="">Resine</a></li>
+        <li><span>Animaux</span></li>
+        <li><span>Fait main</span></li>
+        <li><a href="">design</a></li>
+        <li><span>couleurs</span></li>
+        <li><a href="">objets</a></li>
+        <li><span>nine</span></li>
+        <li><a href="">ten</a></li>
     <li><a href="https://example.com" target="_blank">one</a></li>
-    <li><a href="">Cool</a></l>
-    <li><a href="">Resine</a></li>
-    <li><span>Animaux</span></li>
-    <li><span>Fait main</span></li>
-    <li><a href="">design</a></li>
-    <li><span>couleurs</span></li>
-    <li><a href="">objets</a></li>
-    <li><span>nine</span></li>
-    <li><a href="">ten</a></li>
-   <li><a href="https://example.com" target="_blank">one</a></li>
-    <li><a href="">two</a></l>
-    <li><a href="">three</a></li>
-    <li><span>four</span></li>
-    <li><span>five</span></li>
-    <li><a href="">six</a></li>
-    <li><span>seven</span></li>
-    <li><a href="">eight</a></li>
-    <li><span>nine</span></li>
-    <li><a href="">ten</a></li>
-  </ul>
-</div>
-<div class="news_ticker">
-  <ul class="news-group">
+        <li><a href="">two</a></l>
+        <li><a href="">three</a></li>
+        <li><span>four</span></li>
+        <li><span>five</span></li>
+        <li><a href="">six</a></li>
+        <li><span>seven</span></li>
+        <li><a href="">eight</a></li>
+        <li><span>nine</span></li>
+        <li><a href="">ten</a></li>
+    </ul>
+    </div>
+    <div class="news_ticker">
+    <ul class="news-group">
+        <li><a href="https://example.com" target="_blank">one</a></li>
+        <li><a href="">two</a></l>
+        <li><a href="">three</a></li>
+        <li><span>four</span></li>
+        <li><span>five</span></li>
+        <li><a href="">six</a></li>
+        <li><span>seven</span></li>
+        <li><a href="">eight</a></li>
+        <li><span>nine</span></li>
+        <li><a href="">ten</a></li>
     <li><a href="https://example.com" target="_blank">one</a></li>
-    <li><a href="">two</a></l>
-    <li><a href="">three</a></li>
-    <li><span>four</span></li>
-    <li><span>five</span></li>
-    <li><a href="">six</a></li>
-    <li><span>seven</span></li>
-    <li><a href="">eight</a></li>
-    <li><span>nine</span></li>
-    <li><a href="">ten</a></li>
-   <li><a href="https://example.com" target="_blank">one</a></li>
-    <li><a href="">two</a></l>
-    <li><a href="">three</a></li>
-    <li><span>four</span></li>
-    <li><span>five</span></li>
-    <li><a href="">six</a></li>
-    <li><span>seven</span></li>
-    <li><a href="">eight</a></li>
-    <li><span>nine</span></li>
-    <li><a href="">ten</a></li>
-  </ul>
-</div>
-<div class="news_ticker">
-  <ul class="news-group">
+        <li><a href="">two</a></l>
+        <li><a href="">three</a></li>
+        <li><span>four</span></li>
+        <li><span>five</span></li>
+        <li><a href="">six</a></li>
+        <li><span>seven</span></li>
+        <li><a href="">eight</a></li>
+        <li><span>nine</span></li>
+        <li><a href="">ten</a></li>
+    </ul>
+
+    {# </div>
+    <div class="news_ticker">
+    <ul class="news-group">
+        <li><a href="https://example.com" target="_blank">one</a></li>
+        <li><a href="">two</a></l>
+        <li><a href="">three</a></li>
+        <li><span>four</span></li>
+        <li><span>five</span></li>
+        <li><a href="">six</a></li>
+        <li><span>seven</span></li>
+        <li><a href="">eight</a></li>
+        <li><span>nine</span></li>
+        <li><a href="">ten</a></li>
     <li><a href="https://example.com" target="_blank">one</a></li>
-    <li><a href="">two</a></l>
-    <li><a href="">three</a></li>
-    <li><span>four</span></li>
-    <li><span>five</span></li>
-    <li><a href="">six</a></li>
-    <li><span>seven</span></li>
-    <li><a href="">eight</a></li>
-    <li><span>nine</span></li>
-    <li><a href="">ten</a></li>
-   <li><a href="https://example.com" target="_blank">one</a></li>
-    <li><a href="">two</a></l>
-    <li><a href="">three</a></li>
-    <li><span>four</span></li>
-    <li><span>five</span></li>
-    <li><a href="">six</a></li>
-    <li><span>seven</span></li>
-    <li><a href="">eight</a></li>
-    <li><span>nine</span></li>
-    <li><a href="">ten</a></li>
-  </ul>
-</div>
-{# <div class="news_ticker">
-  <ul class="news-group">
+        <li><a href="">two</a></l>
+        <li><a href="">three</a></li>
+        <li><span>four</span></li>
+        <li><span>five</span></li>
+        <li><a href="">six</a></li>
+        <li><span>seven</span></li>
+        <li><a href="">eight</a></li>
+        <li><span>nine</span></li>
+        <li><a href="">ten</a></li>
+    </ul>
+    </div> #}
+    
+    {# <div class="news_ticker">
+    <ul class="news-group">
+        <li><a href="https://example.com" target="_blank">one</a></li>
+        <li><a href="">two</a></l>
+        <li><a href="">three</a></li>
+        <li><span>four</span></li>
+        <li><span>five</span></li>
+        <li><a href="">six</a></li>
+        <li><span>seven</span></li>
+        <li><a href="">eight</a></li>
+        <li><span>nine</span></li>
+        <li><a href="">ten</a></li>
     <li><a href="https://example.com" target="_blank">one</a></li>
-    <li><a href="">two</a></l>
-    <li><a href="">three</a></li>
-    <li><span>four</span></li>
-    <li><span>five</span></li>
-    <li><a href="">six</a></li>
-    <li><span>seven</span></li>
-    <li><a href="">eight</a></li>
-    <li><span>nine</span></li>
-    <li><a href="">ten</a></li>
-   <li><a href="https://example.com" target="_blank">one</a></li>
-    <li><a href="">two</a></l>
-    <li><a href="">three</a></li>
-    <li><span>four</span></li>
-    <li><span>five</span></li>
-    <li><a href="">six</a></li>
-    <li><span>seven</span></li>
-    <li><a href="">eight</a></li>
-    <li><span>nine</span></li>
-    <li><a href="">ten</a></li>
-  </ul>
-</div> #}
+        <li><a href="">two</a></l>
+        <li><a href="">three</a></li>
+        <li><span>four</span></li>
+        <li><span>five</span></li>
+        <li><a href="">six</a></li>
+        <li><span>seven</span></li>
+        <li><a href="">eight</a></li>
+        <li><span>nine</span></li>
+        <li><a href="">ten</a></li>
+    </ul>
+    </div> #}
+
+
+</section>
 
 
 
@@ -143,9 +283,7 @@ Based on: GreenSock's pen here: https://codepen.io/GreenSock/pen/jOBBVjr
 
 
 
-
-
-
+{# 
 <main class="container">
     <secrion class="row">
         <div class="col-12">
@@ -155,7 +293,7 @@ Based on: GreenSock's pen here: https://codepen.io/GreenSock/pen/jOBBVjr
             <p>Je sait, c'est un concept...</p>
 
         </div>
-        <div class="col-12">
+        <div class="col-12"> #}
 
             {# <a href="{{ path('indexProduits') }}">Page des produits</a>
 
@@ -165,11 +303,11 @@ Based on: GreenSock's pen here: https://codepen.io/GreenSock/pen/jOBBVjr
 
             <a href="{{ path('') }}"></a> #}
 
-        </div>
+        {# </div> #}
 
         {# {{ dump() }} Faire un dump pour voir la liste des categories disponible dans cette vue !!  #}
             
-        {% for cat in categories %}
+        {# {% for cat in categories %}
         
             {% if cat.parent == null %}
                 <div class="col-12">
@@ -192,13 +330,13 @@ Based on: GreenSock's pen here: https://codepen.io/GreenSock/pen/jOBBVjr
                         </div>
                     </div>
                 </div>  
-            {% endif %}
-        {% endfor %}
+            {# {% endif %} #}
+        {# {% endfor %} #} 
 
 
 <br>
 <br>
-<h2> Les produits :</h2>
+{# <h2> Les produits :</h2> #}
 <br>
 <br>
 
