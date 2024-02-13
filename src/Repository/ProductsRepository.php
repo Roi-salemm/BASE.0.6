@@ -101,5 +101,17 @@ class ProductsRepository extends ServiceEntityRepository
 
 
 
+   public function findArticlesByCategory($categories, $limit)
+   {
+    return $this->createQueryBuilder('p')
+            ->select('p')
+            ->leftJoin('p.categories', 'c') // Jointure avec la table Category sur le champ 'category' de Product
+            ->where('c.id = $categories') // Filtrer par l'ID de catégorie spécifié
+            ->setParameter('categories_id', $categories->getId())
+            ->orderBy('p.id', 'DESC') // Tri par ID de produit en ordre décroissant pour obtenir les derniers produits
+            ->setMaxResults($limit) // Limiter les résultats aux 4 premiers
+            ->getQuery()
+            ->getResult(); // Obtenir les résultats
+    }
 
 }

@@ -40,22 +40,20 @@
         <section class="row">
 
             <div class="col-12">
-                 {# {{ dump() }} #}
+                <div class="space"></div>
                 <h1>{{ product.name }}</h1>
+                <div class="space"></div>
             </div>
 
             <div class="col-6">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
-                        {# image correspont a $image dans l'entity products #}
-                        {# le for dit : tourne de 1 a lenght. Crée un indicateur en bas de l'image #}
                         {% for iteration in 1..product.images|length %}
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ iteration - 1 }}" {{ (loop.first ) ?'class="active" aria-current="true"' : '' }} aria-label="Slide {{ iteration }}"></button>
                         {% endfor %}
                     </div>
                     <div class="carousel-inner">
                         {% for image in product.images %}
-                            {# la ligne veut dire = si loop (deffilement d'image) = 0 alors active (play) si non ne fait rien #}
                             <div class="carousel-item {{ (loop.first ) ? 'active' : '' }}">
                                 <img src="{{ asset('assets/uploads/products/mini/300x300-') ~ image.name }}" class="d-block w-100" alt="{{ product.name }}">
                             </div>
@@ -74,21 +72,158 @@
 
             <div class="col-6">
                 <p>{{ product.description }}</p> 
-
-                {# recherche le nom de la categorie du produit #}
                 <p>Catégorie : {{ product.categories.name }}</p>
-
                 <p>Prix : {{ product.price / 100 }} €</p>
-
-                {# gestion des commande en fonction du stock #}
                 {% if product.stock > 0 %}
                     <a href="{{ path('cart_add', {id: product.id}) }}" class="btn btn-success">Ajouter au panier</a>
                 {% else %}
                     <p class="text-danger">Temporairement en rupture de stock</p>
                 {% endif %}
-
             </div>
 
         </section>
+
+        <div class="space"></div>
+        <div class="space"></div>
+
+        <div class="trait"></div>
+
+        <div class="space"></div>
+        <div class="space"></div>
+
+
+
+
+
+       <section class="column">
+        {# <p class="">Suggestion</p> #}
+        <p class="">Les derniers créations</p>
+            <div class="suggestion">
+                <ul class="suggestion__row">
+           
+                {% for item in allProducts %}
+                
+                    <li class="suggestion__articles">
+                    <a href="{{ path('produits_details', {id: item.id}) }}" class="">
+                        <div>
+                            <img src="{{ asset('assets/uploads/products/mini/300x300-'~ item.images[0].name ) }}" alt="{{ item.name }}" class="card__simple">
+                        </div>
+                        <h3 class="suggestion__titre">{{ item.name }}</h3>   
+                        <span class="suggestion__price">{{ product.price / 100 }} €</span>   
+                        {# <p>Catégorie : {{ product.categories.name }}</p> #}
+                    </a>
+                    </li>
+
+                {% endfor %}
+                </ul>
+            </div>
+
+       </section>
+       <div class="space"></div>
+       <div class="space"></div>        
+       <div class="space"></div>
+       <div class="space"></div>
+       <div class="space"></div>
+       <div class="space"></div>
+       <div class="space"></div>
+       <div class="space"></div>
+
+
+       {# <li>
+        <a href="{{ path('produits_details', {id: item.id}) }}" class="card">
+            <img src="{{ asset('assets/uploads/products/mini/300x300-'~ item.images[0].name ) }}" alt="{{ item.name }}" class="card__image">
+            <div class="card__overlay">
+            <div class="card__header">
+                <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
+                <img class="card__thumb" src="https://i.imgur.com/7D7I6dI.png" alt="" />
+                <div class="card__header-text">
+                <h3 class="card__title">{{ item.name }}</h3>            
+                <span class="card__status">{{ item.price }} $</span>
+                </div>
+            </div>
+            <p class="card__description">{{ item.description }}</p>
+            </div>
+        </a>      
+        </li> #}
+
+
+
+
+
+
+
+        {# <main>
+            <div class="container">
+              <div class="grid second-nav">
+                <div class="column-xs-12">
+                  <nav>
+                    <ol class="breadcrumb-list">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#">Household Plants</a></li>
+                      <li class="breadcrumb-item active">Bonsai</li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+              <div class="grid product">
+                <div class="column-xs-12 column-md-7">
+                  <div class="product-gallery">
+                    <div class="product-image">
+                      <img class="active" src="https://source.unsplash.com/W1yjvf5idqA">
+                    </div>
+                    <ul class="image-list">
+                      <li class="image-item"><img src="https://source.unsplash.com/W1yjvf5idqA"></li>
+                      <li class="image-item"><img src="https://source.unsplash.com/VgbUxvW3gS4"></li>
+                      <li class="image-item"><img src="https://source.unsplash.com/5WbYFH0kf_8"></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="column-xs-12 column-md-5">
+                  <h1>Bonsai</h1>
+                  <h2>$19.99</h2>
+                  <div class="description">
+                    <p>The purposes of bonsai are primarily contemplation for the viewer, and the pleasant exercise of effort and ingenuity for the grower.</p>
+                    <p>By contrast with other plant cultivation practices, bonsai is not intended for production of food or for medicine. Instead, bonsai practice focuses on long-term cultivation and shaping of one or more small trees growing in a container.</p>
+                  </div>
+                  <button class="add-to-cart">Add To Cart</button>
+                </div>
+              </div>
+              <div class="grid related-products">
+                <div class="column-xs-12">
+                  <h3>You may also like</h3>
+                </div>
+                <div class="column-xs-12 column-md-4">
+                  <img src="https://source.unsplash.com/miziNqvJx5M">
+                  <h4>Succulent</h4>
+                  <p class="price">$19.99</p>
+                </div>
+                <div class="column-xs-12 column-md-4">
+                  <img src="https://source.unsplash.com/2y6s0qKdGZg">
+                  <h4>Terranium</h4>
+                  <p class="price">$19.99</p>
+                </div>
+                <div class="column-xs-12 column-md-4">
+                  <img src="https://source.unsplash.com/6Rs76hNbIWE">
+                  <h4>Cactus</h4>
+                  <p class="price">$19.99</p>
+                </div>
+              </div>
+            </div>
+          </main> #}
+
+
+
     </main>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

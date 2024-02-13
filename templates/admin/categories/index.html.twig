@@ -33,8 +33,8 @@
                                     {# {% endif %} #}
                                 <td>{{ categorie.categoryOrder }}</td>
                                 <td>
-                                    <button><a class="" href="{{ path('admin_categories_edit', {id: categorie.id}) }}">Modifier</a></button>
-                                    <button><a class="text-danger" href="{{ path('admin_categories_delete', {id: categorie.id}) }}">Supprimer</a></button>
+                                    <a class="btn_modifier" href="{{ path('admin_categories_edit', {id: categorie.id}) }}">Modifier</a>
+                                    <a class="btn_supprimer" href="{{ path('admin_categories_delete', {id: categorie.id}) }}">Supprimer</a>
                                 </td>
                             </tr>
                             

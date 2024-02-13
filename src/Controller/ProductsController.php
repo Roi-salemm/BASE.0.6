@@ -20,13 +20,6 @@ class ProductsController extends AbstractController
 
         $pro = $productsRepository->findBy([], ['name' => 'asc']);
 
-        // dd($pro);
-      
-        // $session = $this->requestStack->getSession();
-        // dd($pro);
-        // dd($session);
-        // dd($_SESSION);
-
         return $this->render('products/index.html.twig', [
             'controller_name' => 'ProductsController',
             'products' => $pro, 
@@ -38,13 +31,24 @@ class ProductsController extends AbstractController
    
     // ^^ produitsDetails
     #[Route('{id}', name: 'details')]
-    public function details(Products $product, ProductsRepository $productsRepository, ): Response
+    public function details(Products $product, ProductsRepository $productsRepository, $id): Response
     {
-        // $pro = $productsRepository->find('id');
+        // $pro = $productsRepository->findBy([], ['name' => 'asc']);
+        $pro = $productsRepository->findBy([], ['created_at' => 'DESC'], 4);
+
+
+        // if (!$product) {
+        //     throw $this->createNotFoundException('Article non trouvé');
+        // } else {
+        //     $category = $productsRepository->find($id);
+        //     $productCategory = $productsRepository->findArticlesByCategory($category, 4);
+        // }
+        
 
         //TODO Au moment de l'affichage produit le prix n'est pas identique a celuis en base de données
         return $this->render('products/details.html.twig', [
-            // 'product' => $pro,
+            'allProducts' => $pro,
+            // 'productCategory' => $productCategory,
             // 'categories' => $categories,
             'product' => $product,
             // 'name' => $productsRepository->findAll()
