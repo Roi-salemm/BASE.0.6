@@ -59,6 +59,9 @@ class Products
     #[ORM\OneToMany(mappedBy: 'products', targetEntity: OrdersDetails::class)]
     private Collection $ordersDetails;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $availability = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -199,6 +202,18 @@ class Products
                 $ordersDetail->setProducts(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isAvailability(): ?bool
+    {
+        return $this->availability;
+    }
+
+    public function setAvailability(?bool $availability): static
+    {
+        $this->availability = $availability;
 
         return $this;
     }

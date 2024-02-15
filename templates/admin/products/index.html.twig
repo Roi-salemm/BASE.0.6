@@ -34,6 +34,7 @@
                             <th>Stock</th>
                             <th>Categorie</th>
                             <th>Actions</th>
+                            <th>Disponibilité</th>
                         </tr>
                     </thead>
 {# <pre>
@@ -52,12 +53,25 @@
                                     <a class="btn_modifier" href="{{ path('admin_products_edit', {id: produit.id}) }}">Modifier</a>
                                     <a class="btn_supprimer" href="{{ path('admin_products_delete', {id: produit.id}) }}">Supprimer</a>
                                 </td>
+                                <td>
+                                    <input type="checkbox" 
+                                    class="product" 
+                                    data-id="{{ produit.id }}" 
+                                    data-av="{{ produit.availability }}" 
+                                    id="availabilityCheckbox" 
+                                    {% if produit.availability == 1 %}checked{% endif %}>
+
+                                    {# {% if produit.availability == 1 %}
+                                        <input class="form-check-input" type="checkbox" role="switch" id="availabilityCheckbox" checked disabled>
+                                    {% else %}
+                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+                                    {% endif %} #}
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
 
                 </table>
-
             </main>
         </div>
     </div>

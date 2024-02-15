@@ -77,10 +77,13 @@
                     {% endif %}
                     
                     <li class="">
-                        <a class="" href="#">Compte</a>
+                        <a class="" href="{{ path('profile_index') }}">Compte</a>
                     </li>
                     <li class="">
                         <a class="" href="{{ path('app_logout')}}">Déconnexion</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="{{ path('cart_index')}}">Pannier</a>
                     </li>
                 {% else %}
                     <li class="">

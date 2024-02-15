@@ -5,6 +5,7 @@
     {{ form_row(productForm.price) }}
     {{ form_row(productForm.stock) }}
     {{ form_row(productForm.images) }}
+    {{ form_row(productForm.availability) }}
 
     {# On affiche les images si on est en édition #}
     {% if app.request.attributes.get('_route') == 'admin_products_edit' %}

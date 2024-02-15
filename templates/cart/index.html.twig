@@ -9,6 +9,7 @@
                     <thead>
                         <tr>
                             <th>Produit</th>
+                            <th>Image</th>
                             <th>Prix</th>
                             <th>Quantité</th>
                             <th>Total</th>
@@ -19,6 +20,7 @@
                         {% for element in data %}
                             <tr>
                                 <td>{{ element.product.name }}</td>
+                                <td><img width="50px" height="50px" src="{{ asset('assets/uploads/products/mini/300x300-'~ element.product.images[0].name ) }}" alt="{{ element.product.name }}"></td>
                                 <td>{{ element.product.price / 100 }} €</td>
                                 <td>{{ element.quantity }}</td>
                                 <td>{{ element.quantity * element.product.price / 100 }} €</td>
@@ -45,6 +47,8 @@
                     </tfoot>
                 </table>
                 <a href="{{ path('app_orders_add') }}" class="btn btn-primary">Valider le panier</a>
+                <div class="space"></div>
+                <div class="space"></div>
             </div>
         </section>
     </main>

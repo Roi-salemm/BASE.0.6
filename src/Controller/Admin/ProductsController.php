@@ -223,4 +223,26 @@ class ProductsController extends AbstractController
         return new JsonResponse(['error' => 'Token invalide'], 400);
     }
 
+
+
+
+    #[Route('/availability', name: 'availability')]
+    public function updateAvailability(Request $request, EntityManagerInterface $em): Response
+    {
+        $productId = $request->request->get('id');
+        $availability = $request->request->get('availability');
+        $product = $em->getRepository(Products::class)->find($productId);
+
+        if (!$product) {
+            throw $this->createNotFoundException('Produit non trouvé pour l\'ID : '.$productId);
+        }
+
+        $product->setAvailability($availability);
+        $em->flush();
+
+        return new Response('La disponibilité a été mise à jour avec succès.');
+    }
+
+
+
 }
