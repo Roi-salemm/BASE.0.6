@@ -22,15 +22,17 @@
                 </thead>
                 <tbody>
                 {% for order in orders %}
+                <a href="{{ path('admin_orders_show', {'id': order.id}) }}">
                     <tr>
                         <td>{{ order.id }}</td>
                         <td>{{ order.reference }}</td>
                         <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                         <td>
-                            <a href="{{ path('admin_orders_show', {'id': order.id}) }}">show</a>
-                            <a href="{{ path('admin_orders_edit', {'id': order.id}) }}">edit</a>
+                            <a href="{{ path('admin_orders_show', {'id': order.id}) }}" class="btn_voir">Voir</a>
+                            {# <a href="{{ path('admin_orders_edit', {'id': order.id}) }}">edit</a> #}
                         </td>
                     </tr>
+                </a>
                 {% else %}
                     <tr>
                         <td colspan="4">no records found</td>

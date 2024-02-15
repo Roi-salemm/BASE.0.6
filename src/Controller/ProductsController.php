@@ -44,8 +44,6 @@ class ProductsController extends AbstractController
         //     $productCategory = $productsRepository->findArticlesByCategory($category, 4);
         // }
         
-
-        //TODO Au moment de l'affichage produit le prix n'est pas identique a celuis en base de données
         return $this->render('products/details.html.twig', [
             'allProducts' => $pro,
             // 'productCategory' => $productCategory,

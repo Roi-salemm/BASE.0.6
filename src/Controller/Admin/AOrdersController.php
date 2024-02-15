@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Orders;
 use App\Entity\OrdersDetails;
+use App\Entity\Users;
 use App\Form\OrdersType;
 use App\Repository\OrdersDetailsRepository;
 use App\Repository\OrdersRepository;
+use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,19 +63,32 @@ class AOrdersController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Orders $order, $id, OrdersDetailsRepository $ordersDetailsRepository, EntityManagerInterface $em): Response
+    public function show(Orders $order, 
+    Users $users,
+    $id, 
+    OrdersDetailsRepository $ordersDetailsRepository, 
+    UsersRepository $usersRepository, 
+    EntityManagerInterface $em): Response
     {
+        $orderDetails = $ordersDetailsRepository->findBy(
+            ['orders' => $id]
+        );
 
-        // $orderDetails = $ordersDetailsRepository->find($id);
-        // $orderDetails = $ordersDetailsRepository->findByOrderId($id);
-
-        // $orderDetails = $this->em->getRepository(OrdersDetails::class);
-
-        // dd($orderDetails);
+        
+        foreach ($orderDetails as $oD) {
+            $order = $oD->getOrders();
+            $user = $order->getUsers();
+            $userId = $user->getId();
+        }
+        $usersRepository = $em->getRepository(Users::class)->findBy(
+            ['id' => $userId]
+        );
+        // dd($user);
 
         return $this->render('admin/orders/show.html.twig', [
             'order' => $order,
-            // 'orderDetails' => $orderDetails,
+            'orderDetails' => $orderDetails,
+            'user' => $usersRepository,
         ]);
     }
 

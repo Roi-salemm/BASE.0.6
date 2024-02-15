@@ -9,13 +9,13 @@
         <main class="col-9 border border-light bg-white p-2">
             <h1>Orders</h1>
 
-            <a href="{{ path('admin_orders_index') }}"><- back to list</a>
+            <a href="{{ path('admin_orders_index') }}" class="no_deco btn_revenir"><- Revenir aux commandes</a>
             <div class="space"></div>
 
             <table class="table">
                 <tbody>
                     <tr>
-                        <th>Id</th>
+                        <th>Identifiant</th>
                         <td>{{ order.id }}</td>
                     </tr>
                     <tr>
@@ -23,28 +23,81 @@
                         <td>{{ order.reference }}</td>
                     </tr>
                     <tr>
-                        <th>Created_at</th>
+                        <th>Date</th>
                         <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     </tr>
+                </tbody>
+            </table>
+
+
+        <h3>Details de la commande :</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Stock</th>
+                        <th>Categorie</th>
+                        <th>Disponibilité</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    {% for produit in orderDetails %} 
+                        <tr>
+                            <td>{{ produit.products.id }}</td>
+                            <td><img width="70px" height="70px" src="{{ asset('assets/uploads/products/mini/300x300-'~ produit.products.images[0].name ) }}" alt="{{ produit.products.name }}"></td>
+                            <td>{{ produit.products.name}}</td>
+                            <td>{{ produit.products.price / 100}}</td>
+                            <td>{{ produit.products.stock }}</td>
+                            <td>{{ produit.products.categories.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+    <h3>Coordoné du client :</h3>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td>{{ user[0].id }}</td>
+                    </tr>
+                    <tr>
+                        <th>E-mail</th>
+                        <td>{{ user[0].email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td><strong>{{ user[0].lastname }}</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Prenom</th>
+                        <td><strong>{{ user[0].firstname }}</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Adress</th>
+                        <td><strong>{{ user[0].address }}</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Code postal</th>
+                        <td><strong>{{ user[0].zipcode }}</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Ville</th>
+                        <td><strong>{{ user[0].city }}</strong></td>
+                    </tr>
                     {# <tr>
-                        <th>Coordoné du client</th>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.lastname }}</td>
-                        <td>{{ user.firstname }}</td>
-                        <td>{{ user.address }}</td>
-                        <td>{{ user.zipcode }}</td>
-                        <td>{{ user.city }}</td>
-                        <td>{{ user.is_verified }}</td>
+                        <th>Compte verifié</th>
+                        <td>{{ user[0].is_verified }}</td>
                     </tr> #}
                 </tbody>
             </table>
-                
-
             
-
             {# <a href="{{ path('admin_orders_edit', {'id': order.id}) }}">edit</a> #}
-
 
         </main>
     </div>
