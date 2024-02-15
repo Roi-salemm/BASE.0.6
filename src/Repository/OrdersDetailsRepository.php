@@ -45,4 +45,33 @@ class OrdersDetailsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByOrderId($id)
+    {
+        return $this->createQueryBuilder('od')
+            ->where('od.orders = :id')
+            ->setParameter('order_id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
+    // public function getOrdersDetails($id)
+    // {
+    //     return $this->createQueryBuilder('od')
+    //         ->select('od')
+    //         ->from(orders::class, 'o')
+    //         ->where('o.orders_id = :id')
+    // }
+
+    // public function yourAction()
+    // {
+    //     $sql = "SELECT * FROM users WHERE age > :age";
+    //     $query = $this->entityManager->createNativeQuery($sql, new ResultSetMapping());
+    //     $query->setParameter('age', 18);
+    //     $users = $query->getResult();
+
+    //     // Faire quelque chose avec les résultats de la requête
+    // }
+
+
 }
