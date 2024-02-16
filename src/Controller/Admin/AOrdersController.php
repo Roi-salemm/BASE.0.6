@@ -104,6 +104,8 @@ class AOrdersController extends AbstractController
         $form = $this->createForm(OrdersType::class, $order);
         $form->handleRequest($request);
 
+        // $statusOptions = ['Enregistré', 'Expedié', 'Erreur', 'Autre'];
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
@@ -113,6 +115,7 @@ class AOrdersController extends AbstractController
         return $this->render('admin/orders/edit.html.twig', [
             'order' => $order,
             'form' => $form,
+            // 'statusOptions' => $statusOptions,
         ]);
     }
 

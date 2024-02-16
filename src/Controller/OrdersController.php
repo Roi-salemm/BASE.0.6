@@ -26,23 +26,18 @@ class OrdersController extends AbstractController
             return $this->redirectToRoute('app_main');
         }
 
-        //Le panier n'est pas vide, on crée la commande
         $order = new Orders();
-
-        // On remplit la commande
         $order->setUsers($this->getUser());
         $order->setReference(uniqid());
+        $order->setStatus('Enregistré');
 
-        // On parcourt le panier pour créer les détails de commande
         foreach($panier as $item => $quantity){
             $orderDetails = new OrdersDetails();
 
-            // On va chercher le produit
             $product = $productsRepository->find($item);
             
             $price = $product->getPrice();
 
-            // On crée le détail de commande
             $orderDetails->setProducts($product);
             $orderDetails->setPrice($price);
             $orderDetails->setQuantity($quantity);

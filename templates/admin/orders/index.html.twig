@@ -8,7 +8,7 @@
     <div class="row">
         {% include "_partials/_adminnav.html.twig" %}
         <main class="col-9 border border-light bg-white p-2">
-            <h1>Les categories</h1>
+            <h1>Les Commandes</h1>
 
             <table class="table">
                 <thead>
@@ -29,7 +29,36 @@
                         <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                         <td>
                             <a href="{{ path('admin_orders_show', {'id': order.id}) }}" class="btn_voir">Voir</a>
-                            {# <a href="{{ path('admin_orders_edit', {'id': order.id}) }}">edit</a> #}
+                            {# <a href="{{ path('admin_orders_edit', {'id': order.id}) }}" class="no_deco">ttt</a> #}
+                        </td>
+                        <td>
+                            {% if order.status == 'Enregistré' %}
+                                <div class="pastille_bleu"></div>
+                                <a href="{{ path('admin_orders_edit', {'id': order.id}) }}" class="no_deco">
+                                    <span class="status bleu">{{ order.status }}</span>
+                                </a>  
+
+                            {% elseif order.status == 'Expedié' %}
+                                <div class="pastille_vert"></div>
+                                <a href="{{ path('admin_orders_edit', {'id': order.id}) }}" class="no_deco">
+                                    <span class="status vert">{{ order.status }}</span>
+                                </a>         
+
+                            {% elseif order.status == 'Erreur' %}
+                                <div class="pastille_rouge"></div>
+                                <a href="{{ path('admin_orders_edit', {'id': order.id}) }}" class="no_deco">
+                                    <span class="status rouge">{{ order.status }}</span>
+                                </a>
+
+                            {% elseif order.status == 'Autre' %}
+                                <div class="pastille_violet"></div>
+                                <a href="{{ path('admin_orders_edit', {'id': order.id}) }}" class="no_deco">
+                                    <span class="status violet">{{ order.status }}</span>
+                                </a>
+
+                            {% else %}
+                                {{ order.status }}
+                            {% endif %}
                         </td>
                     </tr>
                 </a>
@@ -46,5 +75,60 @@
         </main>
     </div>
 </div>
+
+
+
+{# 
+<div class="container">
+    <div class="row">
+        {% include "_partials/_adminnav.html.twig" %}
+        <main class="col-9 border border-light bg-white p-2">
+            <h1>Les Commandes</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Identifiant</th>
+                        <th>Reference</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                        <th>Statue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.reference }}</td>
+                        <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('admin_orders_show', {'id': order.id}) }}" class="btn_voir">Voir</a>
+                           
+                        </td>
+                        <td>
+                            <button class="btn btn-success button-slide">Commander</button>
+                            <button class="btn btn-warning button-slide">Expedier</button>
+                            <button class="btn btn-danger button-slide">Erreur</button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+  
+            
+        </main>
+    </div> #}
+</div>
+
+
+
+
+
+
 
 {% endblock %}

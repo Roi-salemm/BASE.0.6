@@ -32,6 +32,9 @@ class Orders
     true, cascade: ['persist'])]
     private Collection $ordersDetails;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $status = null;
+
     public function __construct()
     {
         $this->ordersDetails = new ArrayCollection();
@@ -117,6 +120,18 @@ class Orders
                 $ordersDetail->setOrders(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
