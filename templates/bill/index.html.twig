@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/fonctionality/bill.css') }}">
+    {# <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> #}
+</head>
+<style>
+    .bill{
+        display: inline;
+    }
+    body{
+        background-color: rgb(255, 255, 255);
+    }
+    h1{
+        color: rgba(26, 23, 70, 0.89);
+    }
+
+    .titre{
+        display: inline;
+        
+        /* position: absolute; */
+        /* right: 70%; */
+    }
+    .facture{
+        display: inline;
+        /* position: absolute; */
+
+    }
+    h3{
+        color: rgb(89, 169, 240);
+        font-size: larger;
+        font-weight: 500;
+    }
+    h2{
+        color: rgb(89, 169, 240);
+    }
+    .space{
+        height: 30px;
+    }
+
+
+
+</style>
+<body>
+
+    <div class="bill">
+        <h1 class="titre">AMEL RESINE</h1>
+        <p class="facture">FACTURE</p>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+                <h2>Commande</h2>
+                <div class="space"></div>
+    
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Identifiant</th>
+                            <td>{{ order.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Reference</th>
+                            <td>{{ order.reference }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <div class="space"></div>
+            <h3>Details de la commande :</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Prix</th>
+                            <th>Stock</th>
+                            <th>Categorie</th>
+                        </tr>
+                    </thead>
+            
+                    <tbody>
+                        {% for produit in orderDetails %} 
+                            <tr>
+                                <td>{{ produit.products.id }}</td>
+                                <td>{{ produit.products.name}}</td>
+                                <td>{{ produit.products.price / 100}}</td>
+                                <td>{{ produit.products.stock }}</td>
+                                <td>{{ produit.products.categories.name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                    {% set total = 0 %} 
+    
+                    {% for produit in orderDetails %} 
+                        {% set total = total + produit.price / 100 %} 
+                    {% endfor %}
+                    
+                    {% set totalWithPercentage = total * (1 + tva / 100) %} 
+                    {% set totalWithPercentageFormatted = totalWithPercentage|number_format(2, '.', ',') %} 
+                    
+                    {% set totalTva = total * (tva / 100) %} 
+                    {% set totalTvaFormatted = totalTva|number_format(2, '.', ',') %}
+                
+                    <div class="space"></div>
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Total Hors Taxe : </th>
+                            <td>{{ total }}</td>
+                        </tr>
+                        <tr>
+                            <th>TVA ({{ tva }}%): </th>
+                            <td>{{ totalTva }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total TTC en euros : </th>
+                            <td>{{ totalWithPercentage }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+    
+                <div class="space"></div>
+        <h3>Coordoné du client :</h3>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Identifiant :</th>
+                            <td>{{ user[0].id }}</td>
+                        </tr>
+                        <tr>
+                            <th>E-mail :</th>
+                            <td>{{ user[0].email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom :</th>
+                            <td><strong>{{ user[0].lastname }}</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Prenom :</th>
+                            <td><strong>{{ user[0].firstname }}</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Adress :</th>
+                            <td><strong>{{ user[0].address }}</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Code postal :</th>
+                            <td><strong>{{ user[0].zipcode }}</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Ville :</th>
+                            <td><strong>{{ user[0].city }}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+    
+            </main>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+</body>
+</html>
+
+
+

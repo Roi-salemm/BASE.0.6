@@ -52,33 +52,21 @@ class CategoriesController extends AbstractController
         EntityManagerInterface $em, 
         CategoriesRepository $categoriesRepository): Response
     {
-        //* Pour refuser les users avec d'autre role que ROLE_ADMIN
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         //^^ Pour ajout :
-        //* récuperation des champs d'entity ettendu 
         $newCategorie = new Categories();
-      
-        // dd($newCategorie);
         
-        //* création du formulaire
         $categorieForm = $this->createForm(CategoriesFormType::class, $newCategorie);
         
-   
-        
-        //* traite la requête du formulaire
         $categorieForm->handleRequest($request);
- 
 
-            //* réception du form :
             if(($categorieForm->isSubmitted()) && ($categorieForm->isValid())){
-                //* -> La Base 
-                
+            
                 $em->persist($newCategorie);
                 $em->flush();
                 $this->addFlash('success', 'Nouvelle Catégorie ajouté avec succès');
             
-            // On redirige
             return $this->redirectToRoute('admin_categories_index');
             }
 
@@ -104,17 +92,12 @@ class CategoriesController extends AbstractController
         // $prix = $product->getPrice() / 100;
         // $product->setPrice($prix);
 
-
-        
-        // On crée le formulaire
         $categoriesForm = $this->createForm(CategoriesFormType::class, $categories);
-// dd($categories);
-        // On traite la requête du formulaire
+
         $categoriesForm->handleRequest($request);
 
-        //On vérifie si le formulaire est soumis ET valide
         if($categoriesForm->isSubmitted() && $categoriesForm->isValid()){
-            // On récupère les images
+ 
             // $images = $categoriesForm->get('images')->getData();
 
             // foreach($images as $image){
@@ -137,13 +120,11 @@ class CategoriesController extends AbstractController
             // $prix = $product->getPrice() * 100;
             // $product->setPrice($prix);
 
-            // On stocke
             $em->persist($categories);
             $em->flush();
 
             $this->addFlash('success', 'Categories modifié avec succès');
 
-            //* On redirige
             return $this->redirectToRoute('admin_categories_index');
         }
 
@@ -159,11 +140,7 @@ class CategoriesController extends AbstractController
     #[Route('/suppression/{id}', name: 'delete')]
     public function delete(Categories $categorie, EntityManagerInterface $em, CategoriesRepository $categoriesRepository): Response
     {
-        //* Verif de si l'utilisateur peut supprimer avec le voter
         $this->denyAccessUnlessGranted('ROLE_ADMIN', $categorie);
-
-
-
 
         if ($categorie->getProducts()->isEmpty()) {
             $em->remove($categorie);

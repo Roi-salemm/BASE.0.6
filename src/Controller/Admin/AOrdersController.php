@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Orders;
 use App\Entity\OrdersDetails;
@@ -10,6 +10,10 @@ use App\Repository\OrdersDetailsRepository;
 use App\Repository\OrdersRepository;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\DomPdf;
+use App\Service\PdfService;
+use Dompdf\Dompdf as DompdfDompdf;
+use Dompdf\Options;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +34,7 @@ class AOrdersController extends AbstractController
     #[Route('/index', name: 'index')]
     public function index(OrdersRepository $ordersRepository): Response
     { 
-        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $allOrders = $ordersRepository->findBy([], [
             'created_at' => 'desc'
@@ -62,28 +66,30 @@ class AOrdersController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Orders $order, 
-    Users $users,
+    #[Route('/{id}', name: 'show')]
+    public function show(
     $id, 
+    Request $request,
     OrdersDetailsRepository $ordersDetailsRepository, 
     UsersRepository $usersRepository, 
     EntityManagerInterface $em): Response
     {
+        $userId = null;
         $orderDetails = $ordersDetailsRepository->findBy(
             ['orders' => $id]
         );
+        $order = $em->getRepository(Orders::class)->find($id);
+  
 
-        
         foreach ($orderDetails as $oD) {
             $order = $oD->getOrders();
             $user = $order->getUsers();
             $userId = $user->getId();
         }
+
         $usersRepository = $em->getRepository(Users::class)->findBy(
             ['id' => $userId]
         );
-        // dd($user);
 
         return $this->render('admin/orders/show.html.twig', [
             'order' => $order,
@@ -120,4 +126,126 @@ class AOrdersController extends AbstractController
 
         return $this->redirectToRoute('admin_orders_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/bill/{id}', name: 'bill')]
+    public function bill(PdfService $pdf, 
+    OrdersDetailsRepository $ordersDetailsRepository, 
+    UsersRepository $usersRepository, 
+    Request $request,
+    $id,
+    EntityManagerInterface $em)
+    { 
+        // require_once '/public/includes/domppdf/autoload.inc.php';
+        // $id = 1;
+
+        // $id = $request->attributes->get('id');
+        // dd($id);
+
+        $orderDetails = $ordersDetailsRepository->findBy(
+            ['orders' => $id]
+        );
+        foreach ($orderDetails as $oD) {
+            $order = $oD->getOrders();
+            $user = $order->getUsers();
+            $userId = $user->getId();
+        }
+        $usersRepository = $em->getRepository(Users::class)->findBy(
+            ['id' => $userId]
+        );
+        
+        $html = $this->render('bill/index.html.twig', [
+            '$orderDetails' => $orderDetails,
+        ]);
+
+        // $pdfContent = $this->domPdf->showPdfFile(Dompdf::class, $html);
+        // $pdf->showPdfFile($html);
+
+        // return $this->render('bill/index.html.twig', [
+        //     '$orderDetails' => $orderDetails,
+
+        // ]);
+
+        // $pdf->showPdfFile($html);
+
+
+    }
+
+    #[Route('/pdf/{id}', name: 'pdf', methods: ["GET","POST"])]
+    public function exportCommandes(Request $request, 
+    PdfService $pdf,
+    Orders $order,
+    EntityManagerInterface $em, 
+    OrdersDetailsRepository $ordersDetailsRepository,
+    $id): Response
+    {       
+        // $order = $em->getRepository(Orders::class)->find($id);
+        $orderDetails = $ordersDetailsRepository->findBy(
+            ['orders' => $id],
+        );
+        foreach ($orderDetails as $oD) {
+            $order = $oD->getOrders();
+            $user = $order->getUsers();
+            $userId = $user->getId();
+        }
+        $usersRepository = $em->getRepository(Users::class)->findBy(
+            ['id' => $userId]
+        );
+        $tva = 20;
+
+        // $order = $em->getRepository(Orders::class)->findBy(
+        //     ['id' => $id]
+        // );
+        
+        // $html = $this->render('bill/index.html.twig', [
+        //     '$orderDetails' => $orderDetails,
+        // ]);
+
+        $html = $this->renderView('bill/index.html.twig', [
+                '$orderDetails' => $orderDetails,
+                'order' => $order,
+                'orderDetails' => $orderDetails,
+                'user' => $usersRepository,
+                'tva' => $tva,
+            ]);
+
+        // $html .= '<link rel="stylesheet" href="/public/assets/css/fonctionality/bill.css">';
+        // $html .= '<script src="/build/vendors~js/app.js"></script><script src="/build/runtime.js"></script><script src="/build/vendors-node_modules_popperjs_core_lib_index_js-node_modules_symfony_stimulus-bridge_dist_ind-f4bfca.js"></script>';
+        $name = 'test';
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new DompdfDompdf($options);
+        $dompdf->loadHtml($html);
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+        // Render the HTML as PDF
+        $dompdf->render();
+        // Output the generated PDF to Browser
+        $dompdf->stream($name, array('Attachment' => 0));
+
+        // od_start();
+        // $html = ob_get_contents()
+        // ob_end_clean();
+        return new Response('', 200, [
+            'Content-Type' => 'application/pdf',
+       
+        ]);
+
+        // return $this->render('admin/orders/show.html.twig', [
+        //     'order' => $order,
+        //     'orderDetails' => $orderDetails,
+        //     'user' => $usersRepository,
+        // ]);
+
+        // return $this->render('admin/besoins/epicerie/export.html.twig', [
+        //     'besoins' => $exBesoin,
+        //     'form' => $form->createView(),
+        //     'valueFournisseur' => $valueFournisseur,
+        //     //'idBesoin' => $idBesoin,
+        //     'formExport' => $formExport->createView(),
+        //     'valu'=> $formValue
+        // ]);
+    }
+
+
 }

@@ -26,12 +26,6 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    # App\Controller\Admin\AdminOrdersController:
-    #     public: true
+    App\Service\DompPdf:
 
-    App\Controller\Admin\AOrdersController:
-        public: true
-
-    App\Controller\AOrdersController:
-        arguments:
-            $ordersRepository: '@App\Repository\OrdersRepository'
+    

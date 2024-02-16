@@ -63,7 +63,7 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <th>ID</th>
+                        <th>Identifiant</th>
                         <td>{{ user[0].id }}</td>
                     </tr>
                     <tr>
@@ -90,14 +90,11 @@
                         <th>Ville</th>
                         <td><strong>{{ user[0].city }}</strong></td>
                     </tr>
-                    {# <tr>
-                        <th>Compte verifié</th>
-                        <td>{{ user[0].is_verified }}</td>
-                    </tr> #}
                 </tbody>
             </table>
             
             {# <a href="{{ path('admin_orders_edit', {'id': order.id}) }}">edit</a> #}
+            <a href="{{ path('admin_orders_pdf', {'id': order.id}) }}" class="no-deco">Telecherger la facture en PDF -></a>
 
         </main>
     </div>
