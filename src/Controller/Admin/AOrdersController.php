@@ -104,8 +104,6 @@ class AOrdersController extends AbstractController
         $form = $this->createForm(OrdersType::class, $order);
         $form->handleRequest($request);
 
-        // $statusOptions = ['Enregistré', 'Expedié', 'Erreur', 'Autre'];
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
@@ -115,7 +113,6 @@ class AOrdersController extends AbstractController
         return $this->render('admin/orders/edit.html.twig', [
             'order' => $order,
             'form' => $form,
-            // 'statusOptions' => $statusOptions,
         ]);
     }
 
@@ -138,11 +135,6 @@ class AOrdersController extends AbstractController
     $id,
     EntityManagerInterface $em)
     { 
-        // require_once '/public/includes/domppdf/autoload.inc.php';
-        // $id = 1;
-
-        // $id = $request->attributes->get('id');
-        // dd($id);
 
         $orderDetails = $ordersDetailsRepository->findBy(
             ['orders' => $id]
@@ -160,17 +152,6 @@ class AOrdersController extends AbstractController
             '$orderDetails' => $orderDetails,
         ]);
 
-        // $pdfContent = $this->domPdf->showPdfFile(Dompdf::class, $html);
-        // $pdf->showPdfFile($html);
-
-        // return $this->render('bill/index.html.twig', [
-        //     '$orderDetails' => $orderDetails,
-
-        // ]);
-
-        // $pdf->showPdfFile($html);
-
-
     }
 
     #[Route('/pdf/{id}', name: 'pdf', methods: ["GET","POST"])]
@@ -181,7 +162,6 @@ class AOrdersController extends AbstractController
     OrdersDetailsRepository $ordersDetailsRepository,
     $id): Response
     {       
-        // $order = $em->getRepository(Orders::class)->find($id);
         $orderDetails = $ordersDetailsRepository->findBy(
             ['orders' => $id],
         );
@@ -194,14 +174,6 @@ class AOrdersController extends AbstractController
             ['id' => $userId]
         );
         $tva = 20;
-
-        // $order = $em->getRepository(Orders::class)->findBy(
-        //     ['id' => $id]
-        // );
-        
-        // $html = $this->render('bill/index.html.twig', [
-        //     '$orderDetails' => $orderDetails,
-        // ]);
 
         $html = $this->renderView('bill/index.html.twig', [
                 '$orderDetails' => $orderDetails,
@@ -219,35 +191,13 @@ class AOrdersController extends AbstractController
         $options->set('isRemoteEnabled', true);
         $dompdf = new DompdfDompdf($options);
         $dompdf->loadHtml($html);
-        // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'portrait');
-        // Render the HTML as PDF
         $dompdf->render();
-        // Output the generated PDF to Browser
         $dompdf->stream($name, array('Attachment' => 0));
 
-        // od_start();
-        // $html = ob_get_contents()
-        // ob_end_clean();
         return new Response('', 200, [
             'Content-Type' => 'application/pdf',
-       
         ]);
-
-        // return $this->render('admin/orders/show.html.twig', [
-        //     'order' => $order,
-        //     'orderDetails' => $orderDetails,
-        //     'user' => $usersRepository,
-        // ]);
-
-        // return $this->render('admin/besoins/epicerie/export.html.twig', [
-        //     'besoins' => $exBesoin,
-        //     'form' => $form->createView(),
-        //     'valueFournisseur' => $valueFournisseur,
-        //     //'idBesoin' => $idBesoin,
-        //     'formExport' => $formExport->createView(),
-        //     'valu'=> $formValue
-        // ]);
     }
 
 

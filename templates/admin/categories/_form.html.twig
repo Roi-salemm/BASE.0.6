@@ -6,8 +6,5 @@
     {{ form_row(categoriesForm.name) }}
     {{ form_row(categoriesForm.categoryOrder) }}
 
-
-    {# Le {{ button_label|default('Ajouter') }} permet de changer le btn  
-            cf edit.html.twig -> le include #}
     <button type="submit" class="btn_color_larger btn_color-1">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(categoriesForm) }}   

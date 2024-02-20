@@ -21,7 +21,6 @@ class MainController extends AbstractController
         $pro = $productsRepository->findBy([], ['name' => 'asc']);
 
         $imagePrincipal = '9b3f3e466fa7206d31d8eb64648659fb.webp';
-        // var_dump($cat);
 
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',

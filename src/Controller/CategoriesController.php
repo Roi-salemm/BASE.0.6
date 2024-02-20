@@ -17,7 +17,6 @@ class CategoriesController extends AbstractController
     #[Route('/categoriesList', name: 'categoriesList')]
     public function list( $slugName, CategoriesRepository $categoriesRepository): Response
     {
-        // var_dump($slugName);
         $category = $categoriesRepository->findBy([], ['categoryOrder' => 'asc']);
 
         return $this->render('categories/list.html.twig', [
@@ -26,46 +25,6 @@ class CategoriesController extends AbstractController
             ]);
 
     }
-
-    // #[Route('/categorie/{slugName}', name: 'categoriesList')]
-    // public function list( $slugName, CategoriesRepository $categoriesRepository): Response
-    // {
-    //     // var_dump($slugName);
-    //     $category = $categoriesRepository->findBy([], ['categoryOrder' => 'asc']);
-
-    //     return $this->render('categories/list.html.twig', [
-    //         'categories' => $category,
-    //         'slugName' => $slugName,
-    //         ]);
-
-    // }
-
-
-
-
-
-    // #[Route('/', name: 'index')]
-    // public function indexy(): Response
-    // {
-    //     return $this->render('products/index.html.twig', [
-    //         'controller_name' => 'ProductsController',
-    //     ]);
-    // }
-
-
-    // A rajouter quand l'entity product serra cree 
-
-    // #[Route('/{slug}', name: 'details')]
-    // public function details(Products $products): Response
-    // {
-    //     return $this->render('products/index.html.twig', [
-    //         'controller_name' => 'ProductsController',
-    //         'product' => $products,
-    //         compact($products),
-    //     ]);
-    // }
-
-
 
 
 }

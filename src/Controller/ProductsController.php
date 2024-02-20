@@ -17,7 +17,6 @@ class ProductsController extends AbstractController
     #[Route('/index', name: 'vitrine')]
     public function index(Categories $categories, ProductsRepository $productsRepository): Response
     {
-
         $pro = $productsRepository->findBy([], ['name' => 'asc']);
 
         return $this->render('products/index.html.twig', [
@@ -33,9 +32,7 @@ class ProductsController extends AbstractController
     #[Route('{id}', name: 'details')]
     public function details(Products $product, ProductsRepository $productsRepository, $id): Response
     {
-        // $pro = $productsRepository->findBy([], ['name' => 'asc']);
         $pro = $productsRepository->findBy([], ['created_at' => 'DESC'], 4);
-
 
         // if (!$product) {
         //     throw $this->createNotFoundException('Article non trouvé');
@@ -50,7 +47,6 @@ class ProductsController extends AbstractController
             // 'categories' => $categories,
             'product' => $product,
             // 'name' => $productsRepository->findAll()
-
         ]);
     }
 
@@ -64,11 +60,10 @@ class ProductsController extends AbstractController
     }
 
 
-
     // ^^ produitsList
     #[Route('/list/{slug}', name: 'produitsList')]
-    public function list(ProductsRepository $productsRepository, $slug){
-
+    public function list(ProductsRepository $productsRepository, $slug)
+    {
         $pro = $productsRepository->findBy([], ['name' => 'asc']);
 
         return $this->render('products/details.html.twig', [

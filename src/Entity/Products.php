@@ -9,8 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-//? Permet de personaliser les types attendu pour chaques entré cf #[Assert\NotBlank()]
-//* Si le require est supprimer du formulaire le message apparait 
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -27,6 +26,8 @@ class Products
     #[ORM\Column]
     private ?int $id = null;
 
+//? Permet de personaliser les types attendu pour chaques entré cf #[Assert\NotBlank()]
+//* Si le require est supprimer du formulaire le message apparait 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le nom du produit ne peut pas être vide')]
     #[Assert\Length(
@@ -167,7 +168,6 @@ class Products
     public function removeImage(Images $image): static
     {
         if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
             if ($image->getProducts() === $this) {
                 $image->setProducts(null);
             }
@@ -197,7 +197,6 @@ class Products
     public function removeOrdersDetail(OrdersDetails $ordersDetail): static
     {
         if ($this->ordersDetails->removeElement($ordersDetail)) {
-            // set the owning side to null (unless already changed)
             if ($ordersDetail->getProducts() === $this) {
                 $ordersDetail->setProducts(null);
             }

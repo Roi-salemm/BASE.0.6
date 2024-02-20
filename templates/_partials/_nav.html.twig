@@ -66,8 +66,6 @@
             
             <li><a class="" href="{{ path('app_main') }}">ACCUEIL</a></li>
             <li> <a class="" href="{{ path('produits_vitrine') }}">BOUTIQUE</a></li>
-            {# <li><a href="#">L</a></li>
-            <li><a href="#">C</a></li> #}
 
             {% if app.user %}   
                     {% if is_granted('ROLE_PRODUCT_ADMIN') %}

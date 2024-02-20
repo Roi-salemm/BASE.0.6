@@ -7,27 +7,22 @@
     {{ form_row(productForm.images) }}
     {{ form_row(productForm.availability) }}
 
-    {# On affiche les images si on est en édition #}
     {% if app.request.attributes.get('_route') == 'admin_products_edit' %}
 
-    {# <fieldset>  #}
         <h2>Images</h2>
         <div class="row">
             {% for image in product.images %}
                 <div class="col-4">
-                    {# les images #}
+
                     <img src="{{ asset('assets/uploads/products/mini/300x300-' ~ image.name ) }}" alt="Image" width="150" class="m-3">
 
-                    {# suppression  #}
                     <a href="{{ path('admin_products_delete_image', {id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>
+                
                 </div>
             {% endfor %}
         </div>
-    {# </fieldset> #}
     
     {% endif %}
 
-    {# Le {{ button_label|default('Ajouter') }} permet de changer le btn  
-            cf edit.html.twig -> le include #}
     <button type="submit" class="btn_color_larger btn_color-1">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(productForm) }}

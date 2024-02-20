@@ -88,7 +88,6 @@ class CategoriesController extends AbstractController
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        //* On divise le prix par 100
         // $prix = $product->getPrice() / 100;
         // $product->setPrice($prix);
 
@@ -111,12 +110,7 @@ class CategoriesController extends AbstractController
             //     $img->setName($fichier);
             //     $product->addImage($img);
             // }
-            
-            // On génère le slug
-            // $slug = $slugger->slug($product->getName());
-            // $product->setSlug($slug);
 
-            // On arrondit le prix 
             // $prix = $product->getPrice() * 100;
             // $product->setPrice($prix);
 
